@@ -22,7 +22,7 @@ class UltimateTests(unittest.TestCase):
         self.assertEqual(report['archives'], 1)
     def test_path_escape_rejected(self):
         with TemporaryDirectory() as d:
-            root = Path(d)
+            root = Path(d).resolve()
             (root/'ok.txt').write_text('apex')
             self.assertEqual(safe_download_path(d, 'ok.txt'), root/'ok.txt')
             with self.assertRaises(ValueError):
