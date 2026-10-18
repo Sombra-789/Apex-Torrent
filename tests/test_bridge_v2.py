@@ -17,7 +17,7 @@ class BridgeV2Tests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.base = Path(self.temp.name)
+        self.base = Path(self.temp.name).resolve()
         self.data = self.base / 'local'
         self.downloads = self.base / 'downloads'
         self.downloads.mkdir()
@@ -105,16 +105,16 @@ class BridgeV2Tests(unittest.TestCase):
 
     def test_relay_acknowledges_manual_not_scan(self):
         t=self.ticket()
-        with patch('bridge_relay.subprocess.Popen') as proc:
+        with patch('bridge_relay.subprocess.Popen') as proc, patch('bridge_relay.os.startfile', create=True) as start:
             status=relay_run(t.request_path,self.launcher)
         self.assertEqual(status,'manual_required')
         self.assertEqual(read_receipt(t)['status'],'manual_required')
         self.assertNotIn('verdict',read_receipt(t))
-        self.assertTrue(proc.called)
+        self.assertTrue(start.called if __import__('sys').platform == 'win32' else proc.called)
 
     def test_relay_smart_opens_external_folder(self):
         t=self.ticket('smart_files','open_folder')
-        with patch('bridge_relay.subprocess.Popen'):
+        with patch('bridge_relay.subprocess.Popen'), patch('bridge_relay.os.startfile', create=True):
             self.assertEqual(relay_run(t.request_path,self.launcher),'folder_opened')
         self.assertEqual(read_receipt(t)['status'],'folder_opened')
         self.assertNotIn('verdict',read_receipt(t))
