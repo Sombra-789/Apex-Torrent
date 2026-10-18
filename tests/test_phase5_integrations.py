@@ -17,7 +17,7 @@ class CompanionSafetyTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.base = Path(self.temp.name)
+        self.base = Path(self.temp.name).resolve()
         self.exe = self.base / 'Thunderbolt.exe'
         self.exe.write_bytes(b'fake-not-executed')
         self.smart = self.base / 'SmartFiles.exe'
