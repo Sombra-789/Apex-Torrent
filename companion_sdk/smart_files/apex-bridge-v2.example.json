@@ -1,0 +1,1 @@
+{"protocol":"apex-bridge-v2","app":"smart_files","actions":["open_folder"],"receiver":"smartfiles_bridge_receiver.py"}

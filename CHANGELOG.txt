@@ -1,0 +1,27 @@
+APEX TORRENT 1.3.8 — FINAL POLISH & SOURCE RECOVERY · 17 OCTUBRE 2026
+
+- Detalles: scroll propio, seis celdas de altura fija y rutas/hash con elisión reversible vía tooltip.
+- Pares/Trackers: anchos mínimos y desplazamiento horizontal para eliminar recortes.
+- Recuperación prudente: reanuncios DHT/tracker opcionales, con pausa y torrents privados respetados.
+- Cooldown compartido 60 s, sin añadir trackers, alterar archivos ni fabricar semillas.
+- Mantiene libtorrent Network Repair, banda, Apex Bridge y persistencia de usuario.
+- 165 pruebas automatizadas en motor simulado; pendiente validación real en Windows.
+
+APEX TORRENT 1.3.7 — VISUAL & PEER INTELLIGENCE · 17 OCTUBRE 2026
+
+- Biblioteca flexible; divisor redimensionable persistente, panel de detalles ocultable.
+- Estadísticas compactas, columnas adaptables, avisos no invasivos.
+- Corrección del endpoint y cliente en pares (tuplas y bytes).
+- Velocidad de contenido útil si libtorrent la informa; distingue tráfico de protocolo.
+- Nuevas pruebas de regresión. Motor de red 1.3.6 conservado.
+
+APEX TORRENT 1.3.6 — NETWORK REPAIR · 17 OCTUBRE 2026
+- Selección de IP origen según las rutas de Windows, sin tráfico externo de prueba.
+- Restricción de sockets TCP/uTP/UDP/DHT a direcciones con ruta local detectada.
+- Restricción opcional de conexiones salientes TCP a IP elegida por sistema operativo.
+- Actualización automática de interfaces al cambiar Wi-Fi, revisada cada ~30 s.
+- Sin rutas: no retornar silenciosamente a todas las interfaces.
+- Modo Compatibilidad reversible; no cambia firewall ni puertos fijos de Windows.
+- Diagnóstico visible de selección/red y botón para volver a detectar ruta.
+- Conserva Apex Bridge v2, Thunderbolt, Smart Files, Smart Engine y biblioteca.
+- Pruebas simuladas; transferencia real pendiente de Windows.

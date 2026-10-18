@@ -1,0 +1,1 @@
+{"protocol":"apex-bridge-v2","app":"thunderbolt","actions":["scan_file"],"receiver":"thunderbolt_bridge_receiver.py"}
