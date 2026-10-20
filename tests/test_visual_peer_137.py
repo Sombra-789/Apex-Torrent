@@ -56,8 +56,8 @@ class VisualContractTests(unittest.TestCase):
                       'self.peer_summary', 'self.insight_box.setMaximumHeight(43)'):
             self.assertIn(token, ui)
         ast.parse(ui)
-        self.assertIn('VERSION = "1.3.8"', (APP/'state.py').read_text('utf8'))
-        self.assertIn('ApexTorrent/1.3.8', (APP/'engine.py').read_text('utf8'))
+        self.assertIn('VERSION = "1.4.0-alpha.1"', (APP/'state.py').read_text('utf8'))
+        self.assertIn('ApexTorrent/1.4.0-alpha.1', (APP/'engine.py').read_text('utf8'))
 
     def test_engine_does_not_change_listen_route(self):
         with tempfile.TemporaryDirectory() as temp:
