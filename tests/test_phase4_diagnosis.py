@@ -104,7 +104,7 @@ class EngineHardening(unittest.TestCase):
 
     def test_opt_in_notification(self):
         self.assertFalse(initial_settings()['notify_problems'])
-        self.assertEqual(VERSION,'1.3.8')
+        self.assertEqual(VERSION,'1.4.0-alpha.1')
 
 if __name__=='__main__':
     unittest.main()
