@@ -1,4 +1,4 @@
-"""Apex Torrent 1.3.8: regression tests for recovery safeguards and UI contracts."""
+"""Apex Torrent 1.4.0-alpha.1: regression tests for recovery safeguards and UI contracts."""
 from __future__ import annotations
 import ast
 import tempfile
@@ -113,8 +113,8 @@ class UiContracts(unittest.TestCase):
         assert '"listen_port", 0' in engine_src
         assert 'self._bridge_launch' in ui
         assert 'self._setup_tray()' in ui
-        self.assertIn('VERSION = "1.3.8"', (APP / 'state.py').read_text('utf-8'))
-        self.assertIn('ApexTorrent/1.3.8', engine_src)
+        self.assertIn('VERSION = "1.4.0-alpha.1"', (APP / 'state.py').read_text('utf-8'))
+        self.assertIn('ApexTorrent/1.4.0-alpha.1', engine_src)
 
 
 if __name__ == '__main__':
