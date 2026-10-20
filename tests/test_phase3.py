@@ -142,7 +142,7 @@ class BulkPriority(unittest.TestCase):
 
 class UIContracts(unittest.TestCase):
     def test_unchanged_lib_and_version(self):
-        self.assertEqual(VERSION, '1.3.8')
+        self.assertEqual(VERSION, '1.4.0-alpha.1')
         source = (ROOT/'app/engine.py').read_text(encoding='utf-8')
         self.assertIn('0.0.0.0:', source)
         self.assertIn('listen_port", 0', source)
