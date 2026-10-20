@@ -5,9 +5,9 @@ import os
 import tempfile
 from pathlib import Path
 
-VERSION = "1.3.8"
-APP_NAME = "Apex Torrent"
-DATA_DIR = Path(os.environ.get("LOCALAPPDATA") or (Path.home() / ".local" / "share")) / "ApexTorrent"
+VERSION = "1.4.0-alpha.1"
+APP_NAME = "Apex Torrent Alpha"
+DATA_DIR = Path(os.environ.get("LOCALAPPDATA") or (Path.home() / ".local" / "share")) / "ApexTorrentAlpha"
 
 
 def initial_settings() -> dict:
