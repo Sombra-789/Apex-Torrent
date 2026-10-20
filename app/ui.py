@@ -19,6 +19,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import QUrl
 from state import VERSION, DATA_DIR, readable_size, readable_speed, readable_eta
 from peer_intelligence import download_activity, displayed_payload_rate
+from swarm_radar import summarize_swarm, radar_text
 from engine import TorrentEngine, EngineError
 from widgets import TransferGraph
 from performance import PROFILES, network_insight
@@ -725,6 +726,23 @@ class MainWindow(QMainWindow):
         why.addLayout(why_actions)
         why.addStretch(1)
         self.tabs.addTab(diagnosis_tab, "Diagnóstico")
+        radar_tab = QWidget()
+        radar_layout = QVBoxLayout(radar_tab)
+        radar_layout.setContentsMargins(18, 14, 18, 16)
+        radar_heading = QLabel("SWARM RADAR · FUENTES OBSERVADAS")
+        radar_heading.setObjectName("statLabel")
+        radar_layout.addWidget(radar_heading)
+        self.radar_summary = QLabel("Selecciona un torrent para consultar su enjambre.")
+        self.radar_summary.setTextFormat(Qt.TextFormat.PlainText)
+        self.radar_summary.setWordWrap(True)
+        self.radar_summary.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
+        radar_layout.addWidget(self.radar_summary)
+        radar_note = QLabel("Observación local: no se modifican trackers, DHT ni puertos. Sin semillas conectadas no significa torrent muerto.")
+        radar_note.setObjectName("muted")
+        radar_note.setWordWrap(True)
+        radar_layout.addWidget(radar_note)
+        radar_layout.addStretch(1)
+        self.tabs.addTab(radar_tab, "Swarm Radar")
         self.tabs.setTabToolTip(6, "¿Por qué no descarga? Explicación de causas y pasos recomendados")
         self.why_body.setMinimumHeight(60)
         self.tabs.currentChanged.connect(lambda _index: self.update_details())
@@ -1778,6 +1796,7 @@ class MainWindow(QMainWindow):
             self._last_peers_signature = None
             self.peers_table.setRowCount(0)
             self.peer_summary.setText("Selecciona un torrent para consultar los pares.")
+            self.radar_summary.setText("Selecciona un torrent para consultar su enjambre.")
             for label in self.details_labels.values():
                 label.setFullText("—")
             self._fill_files([])
@@ -1829,6 +1848,14 @@ class MainWindow(QMainWindow):
             self._refresh_torrent_reason(rid, rec)
         if tab == 5 and (selected_changed or self._tick_count % 8 == 0):
             self.refresh_security(rec, rid)
+        if tab == 7:
+            try:
+                peers = self.engine.peer_details(rid)
+                snapshot = summarize_swarm(rec, peers)
+                self.radar_summary.setText(radar_text(snapshot))
+            except Exception as exc:
+                logging.warning("Swarm Radar no disponible: %s", exc)
+                self.radar_summary.setText("Datos de enjambre no disponibles; descarga sin cambios.")
         if tab == 3:
             try:
                 self._fill_peers(self.engine.peer_details(rid))
