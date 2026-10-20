@@ -23,20 +23,20 @@ def main():
         try:
             import ctypes
             ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
-                "ApexSoftware.ApexTorrent.Desktop")
+                "ApexSoftware.ApexTorrent.Alpha")
         except (AttributeError, OSError) as exc:
             logging.warning("No se pudo establecer el identificador de tarea: %s", exc)
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(filename=str(DATA_DIR / "apex_torrent.log"), level=logging.ERROR,
                         format="%(asctime)s %(levelname)s %(message)s", encoding="utf-8")
     app = QApplication(sys.argv)
-    app.setApplicationName("Apex Torrent")
+    app.setApplicationName("Apex Torrent Alpha")
     app.setQuitOnLastWindowClosed(False)  # cierre controlado con/sin bandeja
     app.setOrganizationName("Apex Visual Studio")
     app.setStyle("Fusion")
     single_instance = QLockFile(str(DATA_DIR / "apex_torrent.lock"))
     single_instance.setStaleLockTime(10000)
-    server_name = "ApexSoftware.ApexTorrent.LocalOpen.v1"
+    server_name = "ApexSoftware.ApexTorrentAlpha.LocalOpen.v1"
     external = next((v for v in sys.argv[1:] if v.lower().startswith("magnet:?") or v.lower().endswith(".torrent")), None)
     if not single_instance.tryLock(100):
         if external:
