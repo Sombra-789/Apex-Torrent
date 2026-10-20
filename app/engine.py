@@ -258,7 +258,7 @@ class TorrentEngine:
             # escuchaba implícitamente en 6881 y Windows negó ese puerto;
             # la única escucha resultante fue IPv6 loopback ::1.
             **interface_settings(s.get("network_mode", "route"), s.get("listen_port", 0), self._route),
-            "user_agent": "ApexTorrent/1.3.8 libtorrent",
+            "user_agent": "ApexTorrent/1.4.0-alpha.1 libtorrent",
         }
         mask = _alert_mask()
         if mask is not None:
