@@ -15,8 +15,8 @@ class CyberpunkUiTests(unittest.TestCase):
 
     def test_version_is_consistent(self):
         state = (SRC / "state.py").read_text(encoding="utf-8")
-        self.assertIn('VERSION = "1.3.8"', state)
-        self.assertIn('ApexTorrent/1.3.8', (SRC / "engine.py").read_text(encoding="utf-8"))
+        self.assertIn('VERSION = "1.4.0-alpha.1"', state)
+        self.assertIn('ApexTorrent/1.4.0-alpha.1', (SRC / "engine.py").read_text(encoding="utf-8"))
 
     def test_sidebar_is_scrollable_and_fixed_sections_exist(self):
         source = (SRC / "ui.py").read_text(encoding="utf-8")
