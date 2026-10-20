@@ -1,0 +1,60 @@
+name: Apex Torrent 1.4 Swarm Radar Alpha - Windows CI
+on:
+  push:
+    branches:
+      - develop/1.4-evolution
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: swarm-radar-alpha-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  alpha-windows:
+    if: github.ref == 'refs/heads/develop/1.4-evolution'
+    runs-on: windows-latest
+    timeout-minutes: 35
+    env:
+      PYTHONPATH: ${{ github.workspace }}\app
+    steps:
+      - name: Checkout experimental branch
+        uses: actions/checkout@v4
+      - name: Prepare Python 3.12 x64
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: x64
+      - name: Install dependencies
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt "pyinstaller>=6,<7"
+      - name: Syntax check
+        shell: pwsh
+        run: python -m compileall -q app tests
+      - name: Full regression suite including Swarm Radar
+        shell: pwsh
+        run: python -m unittest discover -s tests -v
+      - name: Build separate Alpha executable
+        shell: pwsh
+        run: |
+          python -m PyInstaller --noconfirm --clean --windowed --onedir --name ApexTorrentAlpha --icon app/assets/apex-torrent.ico --add-data 'app/assets;assets' --paths app --hidden-import libtorrent --hidden-import swarm_radar app/main.py
+          if (!(Test-Path 'dist/ApexTorrentAlpha/ApexTorrentAlpha.exe')) { throw 'Alpha executable missing' }
+      - name: Install Inno Setup
+        shell: pwsh
+        run: choco install innosetup --yes --no-progress
+      - name: Build separate Alpha installer
+        shell: pwsh
+        run: |
+          & 'C:\Program Files (x86)\Inno Setup 6\ISCC.exe' installer/ApexTorrentAlpha.iss
+          if (!(Test-Path 'release/ApexTorrent_1.4.0_alpha1_Setup_x64.exe')) { throw 'Alpha installer missing' }
+          Get-FileHash 'release/ApexTorrent_1.4.0_alpha1_Setup_x64.exe' -Algorithm SHA256 | ForEach-Object { "$($_.Hash) *ApexTorrent_1.4.0_alpha1_Setup_x64.exe" } | Set-Content 'release/SHA256SUMS.txt'
+      - name: Upload Alpha installer for manual testing
+        uses: actions/upload-artifact@v4
+        with:
+          name: ApexTorrent_1.4.0_alpha1_Installer_Windows_TEST
+          path: |
+            release/ApexTorrent_1.4.0_alpha1_Setup_x64.exe
+            release/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14
