@@ -175,7 +175,7 @@ class MainWindow(QMainWindow):
     def __init__(self, engine: TorrentEngine):
         super().__init__()
         self.engine = engine
-        self.setWindowTitle(f"Apex Torrent {VERSION} — Ultimate Edition (Final Polish)")
+        self.setWindowTitle(f"Apex Torrent {VERSION} — Evolution / Swarm Radar Alpha 1")
         self.resize(1450, 865)
         self.setMinimumSize(980, 630)
         self.setStyleSheet(theme_for(self.engine.settings.get("accent_theme", "Azul")))
