@@ -35,7 +35,7 @@ class CompanionSafetyTests(unittest.TestCase):
             'actions': [action]}),encoding='utf-8')
 
     def test_version(self):
-        self.assertEqual(VERSION, '1.3.8')
+        self.assertEqual(VERSION, '1.4.0-alpha.1')
 
     def test_executable_validations(self):
         self.assertEqual(executable_path(str(self.exe)),self.exe.resolve())
