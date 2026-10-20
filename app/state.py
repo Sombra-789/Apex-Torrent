@@ -12,7 +12,7 @@ DATA_DIR = Path(os.environ.get("LOCALAPPDATA") or (Path.home() / ".local" / "sha
 
 def initial_settings() -> dict:
     return {
-        "download_dir": str(Path.home() / "Downloads" / "Apex Torrent"),
+        "download_dir": str(Path.home() / "Downloads" / "Apex Torrent Alpha"),
         "download_limit_kib": 0,
         "upload_limit_kib": 0,
         "connections_limit": 200,
