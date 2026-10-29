@@ -1,5 +1,7 @@
 # Guía de instalación, uso y requisitos — Apex Torrent
 
+**Contacto oficial Apex Software Inc.:** [apexsoftware.inc07@gmail.com](mailto:apexsoftware.inc07@gmail.com) — sugerencias, quejas, fallos y propuestas. [Guía de contacto y soporte](CONTACTO_Y_SOPORTE.md).
+
 **Producto del ecosistema Apex Software Inc.** (denominación de marca utilizada por este proyecto; no implica certificación ni acredita por sí sola una sociedad legalmente constituida).
 
 ## Para qué sirve
