@@ -1,5 +1,7 @@
 # Apex Torrent 1.3.8 — Final Polish & Source Recovery (candidato de prueba)
 
+> **Apex Software Inc. — Proyecto del ecosistema Apex Software.** [Guía completa de instalación, funcionamiento, requisitos, dependencias y limitaciones](GUIA_INSTALACION_Y_USO.md). La denominación “Inc.” se usa como identidad de proyecto y no constituye prueba de registro legal.
+
 Conserva el motor libtorrent, la selección de adaptador de **Network Repair 1.3.6**, Smart Engine, estadísticas, bandeja y Apex Bridge. No borra ni reescribe torrents ni descargas al actualizar.
 
 ## Correcciones visuales
