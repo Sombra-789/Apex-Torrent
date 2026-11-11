@@ -1,3 +1,24 @@
+# Apex Torrent
+
+## Empieza aquí
+
+Gestiona descargas BitTorrent mediante archivos .torrent o enlaces magnet, con biblioteca, pares, trackers y diagnóstico de red.
+
+- [Manual: instalación, primer uso, dependencias y limitaciones](GUIA_INSTALACION_Y_USO.md).
+- [Soporte y plantilla para quejas, sugerencias y errores](CONTACTO_Y_SOPORTE.md).
+- Correo: [apexsoftware.inc07@gmail.com](mailto:apexsoftware.inc07@gmail.com).
+
+Abierto a futuras actualizaciones de mantenimiento, seguridad, compatibilidad y mejoras. Las propuestas se revisan sin compromiso de fecha.
+
+## Estado y descarga
+
+El código de main se presenta como **1.3.8 candidato de prueba**. No hay Releases publicadas al 11 de noviembre de 2026; los paquetes de Actions pueden corresponder a otras ediciones. El manual separa la ejecución desde fuente de los paquetes experimentales.
+
+## Notas técnicas y versiones anteriores
+
+<details>
+<summary>Ver cambios, actualización e historial del proyecto</summary>
+
 # Apex Torrent 1.3.8 — Final Polish & Source Recovery (candidato de prueba)
 
 **Contacto oficial Apex Software Inc.:** [apexsoftware.inc07@gmail.com](mailto:apexsoftware.inc07@gmail.com) — sugerencias, quejas, fallos y propuestas. [Guía de contacto y soporte](CONTACTO_Y_SOPORTE.md).
@@ -120,3 +141,5 @@ Para quienes todavía usan **1.3.4**, usa el parche específico *1.3.4 → 1.3.6
 ## Pruebas
 
 `EJECUTAR_PRUEBAS.bat` ejecuta pruebas automatizadas offline. La suite comprueba configuración, registros locales, UI por análisis de código, integraciones y rutas simuladas. **La descarga real y los cambios de Wi-Fi deben validarse en Windows.** Los ZIP contienen código y scripts, no `.exe` precompilado.
+
+</details>

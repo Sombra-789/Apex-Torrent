@@ -1,33 +1,78 @@
-# Guía de instalación, uso y requisitos — Apex Torrent
+# Manual de instalación y uso — Apex Torrent
 
-**Contacto oficial Apex Software Inc.:** [apexsoftware.inc07@gmail.com](mailto:apexsoftware.inc07@gmail.com) — sugerencias, quejas, fallos y propuestas. [Guía de contacto y soporte](CONTACTO_Y_SOPORTE.md).
+Gestiona descargas BitTorrent mediante archivos .torrent o enlaces magnet, con biblioteca, pares, trackers y diagnóstico de red.
 
-**Producto del ecosistema Apex Software Inc.** (denominación de marca utilizada por este proyecto; no implica certificación ni acredita por sí sola una sociedad legalmente constituida).
+[Inicio](README.md) · [Soporte y plantilla](CONTACTO_Y_SOPORTE.md)
 
-## Para qué sirve
-Cliente BitTorrent para gestionar torrents autorizados, pares, trackers, selección de adaptador, diagnóstico de red, reanuncio y recuperación de fuentes.
+## Antes de empezar
 
-## Descargas disponibles
-[Instalador Windows 1.3.8 en Actions](https://github.com/Sombra-789/Apex-Torrent/actions/runs/39108540999) · [Alpha 1.4.0 experimental](https://github.com/Sombra-789/Apex-Torrent/actions/runs/39506715187)
-
-**Importante:** GitHub Actions Artifacts puede exigir inicio de sesión y caducar. Los paquetes beta/preview no se equiparan a versiones estables.
+Las opciones empaquetadas descritas están orientadas a Windows x64. Necesitas espacio para la aplicación y tus archivos; las descargas y la primera preparación desde código requieren Internet. Un archivo **ZIP** es una carpeta comprimida: usa clic derecho → **Extraer todo** antes de abrir el programa. El código descargado de **main** puede corresponder a una edición diferente de las Releases.
 
 ## Instalación paso a paso
-Para el ejecutable, abre la ejecución correcta de Actions, descarga el archivo en Artifacts, extrae e inspecciona el paquete antes de ejecutar el instalador. Para código fuente, instala Python 3.12/3.13 x64 en Windows, extrae el repositorio, ejecuta `INSTALAR_WINDOWS.bat` y abre `INICIAR_WINDOWS.bat`. Antes de actualizar respalda `%LOCALAPPDATA%\ApexTorrent` y cierra la aplicación desde la bandeja.
 
-## Cómo funciona y cómo utilizarlo
-Añade un magnet o torrent autorizado, elige destino, observa disponibilidad, pares y progreso. En Red/Diagnóstico revisa interfaces y puertos; utiliza 'Intentar recuperar fuentes' solo cuando corresponda; 'Verificar archivos' comprueba las piezas locales.
+### Desde el código de este repositorio (candidato 1.3.8)
 
-## Requisitos y dependencias
-Windows x64, conexión P2P permitida, espacio según descarga. Desde código: Python 3.12/3.13 x64, `PySide6>=6.9,<7`, `libtorrent==2.0.15`, `psutil>=6,<8` (requirements.txt). El instalador de Actions puede requerir sesión de GitHub y caduca.
+1. Instala Python 3.12 o 3.13 **de 64 bits** desde [python.org](https://www.python.org/downloads/), incluyendo Python Launcher (py).
+2. En GitHub abre **Code → Download ZIP**. Extrae todo en una carpeta donde puedas guardar archivos; no ejecutes nada dentro del ZIP.
+3. Abre `INSTALAR_WINDOWS.bat`. Espera a que prepare el entorno y confirme la instalación; necesita Internet para descargar dependencias.
+4. Abre `INICIAR_WINDOWS.bat`. En siguientes ocasiones utiliza el mismo archivo o el acceso directo.
+5. Si falla, ejecuta `VERIFICAR_WINDOWS.bat` y guarda el mensaje para soporte.
 
-## Limitaciones, seguridad y privacidad
-No crea semillas, no garantiza velocidad ni recuperación de torrents sin pares; DHT/trackers dependen de la red. La detección de ruta no es un kill switch VPN. El README histórico describe 1.3.8 como candidato de prueba; la alpha 1.4 no debe considerarse estable. P2P solo con archivos cuyo intercambio esté autorizado.
+### Paquetes de pruebas
 
-## Más información
-- [Repositorio GitHub](https://github.com/Sombra-789/Apex-Torrent)
-- [Ficha de proyecto en Notion](https://app.notion.com/p/3fd252e21ba681d29a95ce03eb90f371)
-- Consulta el README y las notas de cada versión para instrucciones adicionales.
+No hay una Release publicada al momento de esta revisión (11 de noviembre de 2026). Consulta [Actions](https://github.com/Sombra-789/Apex-Torrent/actions) si necesitas un paquete generado: elige una ejecución correcta, comprueba su versión y descarga Artifacts. Puede exigir una cuenta GitHub y los archivos pueden caducar. Una compilación alpha de Actions puede diferir del código de main; no la trates como estable.
 
----
-© 2026 Apex Software Inc. — Identidad de proyecto. Las bibliotecas externas pertenecen a sus respectivos titulares y conservan sus licencias. No se afirma registro mercantil ni afiliación con terceros.
+## Primer uso
+
+1. Abre la aplicación y añade un archivo .torrent o enlace magnet cuyo intercambio esté autorizado.
+2. Elige la carpeta de destino con espacio suficiente y confirma el inicio.
+3. Selecciona la descarga para consultar progreso, archivos, semillas y pares. Puedes pausar y reanudar desde la biblioteca.
+4. Si no avanza, revisa **Red / Diagnóstico**. **Intentar recuperar fuentes** solicita otro intento de descubrimiento; **Verificar archivos** comprueba piezas locales.
+5. Para cerrar antes de actualizar, usa **Salir completamente** desde la bandeja del sistema.
+
+## Dependencias y para qué sirven
+
+La tabla corresponde a los archivos de dependencias de **main** revisados el 11 de noviembre de 2026. Los paquetes compilados incluyen sus propios componentes; no instales estas bibliotecas manualmente para usar un paquete que ya las incorpora.
+
+| Componente | Para qué sirve |
+| --- | --- |
+| Python 3.12/3.13 x64 | Ejecuta el código y crea el entorno aislado .venv. |
+| PySide6 >=6.9,<7 | Muestra la interfaz gráfica. |
+| libtorrent ==2.0.15 | Realiza las transferencias y gestiona el protocolo BitTorrent. |
+| psutil >=6,<8 | Consulta recursos del equipo para monitorización. |
+
+Consulta [requirements.txt](requirements.txt) para los rangos declarados. No es necesario instalar otros proyectos Apex para las funciones básicas.
+
+## Comprobar una descarga en Windows
+
+Abre PowerShell en la carpeta donde descargaste el paquete y ejecuta, sustituyendo el nombre por el archivo real:
+
+```powershell
+Get-FileHash -Algorithm SHA256 -LiteralPath ".\NOMBRE_DEL_ARCHIVO"
+```
+
+Compara el valor **Hash** completo con el de su archivo `.sha256` o `SHA256SUMS.txt`. Deben coincidir; si difieren, no uses ese paquete. La coincidencia ayuda a detectar cambios respecto a la huella publicada, pero no sustituye una firma digital ni acredita por sí sola la identidad del autor.
+
+## Si algo falla
+
+1. Confirma qué edición y versión abriste y que extrajiste el paquete completo.
+2. Si usas código, verifica la versión de Python indicada y conserva el mensaje del instalador de dependencias.
+3. Si falta un componente o el antivirus muestra una alerta, guarda el mensaje y consulta soporte antes de modificar protecciones.
+4. Envía la [plantilla de soporte](CONTACTO_Y_SOPORTE.md) a [apexsoftware.inc07@gmail.com](mailto:apexsoftware.inc07@gmail.com).
+
+## Limitaciones
+
+- Sin semillas o pares disponibles puede no haber descarga. No crea fuentes ni garantiza velocidad.
+- Trackers, DHT y conectividad dependen de la red, sus políticas y los participantes.
+- La detección de ruta de Windows no ofrece un kill switch verificable para VPN.
+- El código de main se presenta como candidato de prueba; las pruebas simuladas no acreditan transferencias reales ni toda la interfaz en Windows.
+
+## Actualizar y conservar tus datos
+
+Cierra desde la bandeja y respalda `%LOCALAPPDATA%\ApexTorrent`. Sigue las instrucciones específicas de la versión en el README antes de reemplazar archivos.
+
+El proyecto está abierto a futuras actualizaciones de mantenimiento, seguridad, compatibilidad y mejoras. Las propuestas son bienvenidas por el canal de soporte; no se prometen funciones ni fechas de entrega.
+
+## Documentación y versiones
+
+El [README](README.md) conserva notas técnicas, estado y enlaces propios del proyecto. La documentación histórica describe la versión que indica su título; no debe aplicarse automáticamente a otra edición.
